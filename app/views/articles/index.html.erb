@@ -1,0 +1,18 @@
+<h1>Listing articles</h1>
+
+<% @articles.each do |article| %>
+  <h2><%= article.title %></h2>
+  <p><%= truncate article.content, :length => 100, :omission => '...' %> <%= link_to 'Show', article %></p>
+  <p><em>This article has <%= pluralize article.comments.count, 'comment' %>.</em></p>
+  
+  <% if can? :manage, article %>
+    <p><%= link_to 'Edit', edit_article_path(article) %> | <%= link_to 'Destroy', article, :confirm => 'Are you sure?', :method => :delete %></p>
+  <% end -%>
+  <hr/>
+<% end %>
+
+<br />
+
+<% if can? :create, Article -%>
+  <%= link_to 'New Article', new_article_path %>
+<% end -%>

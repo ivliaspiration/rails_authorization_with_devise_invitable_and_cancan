@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <em>Hello, <%= current_user.email %>!</em>
+  <br/>
+  <% if can? :invite, Author -%>
+    <li><%= link_to 'Invite user', new_user_invitation_path %></li>
+  <% end -%>
+  <li>
+  <%= link_to('Edit registration', edit_user_registration_path) %>
+  </li>
+<% else %>
+  <li>
+  <%= link_to('Register', new_user_registration_path)  %>
+  </li>
+<% end %>

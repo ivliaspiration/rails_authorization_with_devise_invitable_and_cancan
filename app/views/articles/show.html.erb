@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @article.title %></h1>
+<% unless @article.author.nil? -%>
+  <p><em>By <%= @article.author.email %></em></p>
+<% end -%>
+<%= simple_format @article.content %>
+
+<% if @article.comments.any? -%>
+  <%= render :partial => "comment", :collection => @article.comments %>
+<% end -%>
+
+
+<% if can? :create, Comment -%>
+<hr/>
+<h2>Add a comment:</h2>
+<%= form_for([@article, @article.comments.build]) do |f| %>
+  <p><%= f.text_area :content %></p>
+  <p><%= f.submit %></p>
+<% end -%>
+
+<% end -%>
+
+<% if can? :manage, @article %>
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<% end -%>
+<%= link_to 'Back', articles_path %>
