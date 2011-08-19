@@ -3,7 +3,9 @@ class CommentsController < ApplicationController
 
   def create
     @article = Article.find(params[:article_id])
-    @article.comments.create(params[:comment])
+    comment = Comment.new(params[:comment])
+    comment.user = current_user
+    @article.comments << comment
     redirect_to article_path(@article)
   end
 end
