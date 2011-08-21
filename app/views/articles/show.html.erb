@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @article.title %></h1>
-<% unless @article.author.nil? -%>
-  <p><em>By <%= @article.author.email %></em></p>
+<% unless @article.user.nil? -%>
+  <p><em>By <%= @article.user.email %></em></p>
 <% end -%>
 <%= simple_format @article.content %>
 
