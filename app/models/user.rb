@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
   before_save :make_author_if_invited
-  
+  has_many :articles
   
   
   def admin?
